@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+@{
+    Html.RenderAction("YeniUrunler", "Home");
+    Html.RenderAction("Servisler", "Home");
+}
+
+

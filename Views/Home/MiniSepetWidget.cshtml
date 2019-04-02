@@ -1,0 +1,74 @@
+﻿
+@model MerilTicaret.App_Classes.Sepet
+
+<script src="~/Content/Meril/js/jquery-1.10.0.min.js"></script>
+
+<script>
+    $(document).ready(function myfunction() {
+        $(".urunSil").click(function UrunSil() {
+            var uId = $(this).attr("name");
+            $.ajax({
+                type: "GET",
+                url:"/Home/SepetUrunAdetDusur",
+                data: { id: uId },
+                success: function myfunction() {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Home/MiniSepetWidget",
+                        success: function myfunction(veri) {
+                            $(".cart-all").html('');
+                            $(".cart-all").html(veri);
+                        },
+                    });
+                },
+                error: function myfunction() {
+                    alert("Hatalı");
+                }
+            });
+        });
+    });
+</script>
+
+<div class="cart-all">
+    <i class="icon-19" title="19"></i>
+    @if (Model != null)
+    {
+        @Model.ToplamTutar.ToString("C2")
+    }
+    else
+    {
+        <span>0 ₺</span>
+    }
+    <div class="inside-cart">
+        <p>
+            @if (Model != null)
+            {
+                <span>Sepette toplam @Model.Urunler.Sum(x => x.Adet) adet ürün bulunmaktadır.</span>
+            }
+            else
+            {
+                <span>Sepette toplam 0 adet ürün bulunmaktadır.</span>
+            }
+        </p>
+        <ul>
+            @if (Model != null)
+            {
+                foreach (var item in Model.Urunler)
+                {
+            <li>
+                <div class="inside-cart-image">
+                    @if (item.Urun.Resim != null)
+                    {
+                        <img src="@item.Urun.Resim.FirstOrDefault(x=>x.Varsayilan==true).OrtaYol" alt="product name" />
+                    }
+                </div>
+                    <a class="urunSil" name="@item.Urun.Id">x</a>
+                    <a href="/Home/UrunDetay/@item.Urun.Adi">@item.Urun.Adi</a>
+                    <p>Tutar: @item.Tutar.ToString("C2")</p>
+                    <p>Adet: @item.Adet</p>
+                </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

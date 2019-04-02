@@ -1,0 +1,74 @@
+﻿
+@model IEnumerable<MerilTicaret.Models.Urun>
+
+<script src="~/Content/Meril/js/jquery-1.10.0.min.js"></script>
+
+<script>
+    $(document).ready(function myfunction() {
+        $(".sepeteAt").click(function myfunction() {
+            var uid = $(this).attr("name");
+            $.ajax({
+                type: "GET",
+                url: "/Home/SepeteEkle",
+                data: { id: uid },
+                success: function myfunction() {
+                    $.ajax({
+                        type:"GET",
+                        url: "/Home/MiniSepetWidget",
+                        success: function VeriGetir(veri) {
+                            $(".cart-all").html('');
+                            $(".cart-all").html(veri);
+                        }
+                    });
+                },
+                error: function myfunction() {
+                    alert("Ürün sepete eklenemedi.");
+                }
+            });
+        });
+    });
+</script>
+
+<div class="box">
+    <div class="container">
+        <div class="tesla-carousel" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-autoplay="false" data-tesla-rotate="false">
+            <div class="site-title">
+                <ul class="wrapper-arrows">
+                    <li><i class="icon-517 prev" title="left arrow"></i></li>
+                    <li><i class="icon-501 next" title="right arrow"></i></li>
+                </ul>
+
+                <div class="site-inside"><span>Ürünler</span></div>
+            </div>
+            <div class="row">
+                <div class="tesla-carousel-items">
+                    @foreach (var urun in Model)
+                    {
+                        <div class="col-md-3 col-xs-6">
+                            <div class="product">
+                                <div class="product-cover">
+                                    <div class="product-cover-hover"><span><a href="/Home/UrunDetay/@urun.Adi">Görüntüle</a></span></div>
+                                    @if (urun.Resim.Count>0)
+                                    {
+                                        <img src="@urun.Resim.FirstOrDefault(x=>x.Varsayilan==true).OrtaYol" alt="product name" />
+                                    }
+                                </div>
+                                <div class="product-details">
+                                    <h1><a href="/Home/UrunDetay/@urun.Adi">@urun.Adi</a></h1>
+                                    <p>@urun.Aciklama</p>
+                                    <div class="product-price">
+                                        <a href="#" class="sepeteAt" name="@urun.Id">
+                                            <i class="icon-257" title="add to cart"></i>
+                                        </a>
+
+                                       @urun.SatisFiyat
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

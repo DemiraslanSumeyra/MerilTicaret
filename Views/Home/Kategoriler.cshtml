@@ -1,0 +1,23 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+
+@model IEnumerable<MerilTicaret.Models.Kategori>
+
+<h2 style="text-align:center; margin-top:20px;">Kategoriler</h2>
+
+<div class="container">
+    @foreach (var kategori in Model)
+    {
+    <ul>
+        <li>
+            <h3 style="text-align:center; font-size:15pt;margin-top:20px; ">@kategori.Adi</h3>
+        </li>  
+    </ul>
+    }
+</div>
