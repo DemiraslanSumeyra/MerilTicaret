@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerilTicaret", "MerilTicaret\MerilTicaret.csproj", "{316EF981-20C9-483A-AC9C-E943695F5899}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerilTicaret", "MerilTicaret.csproj", "{316EF981-20C9-483A-AC9C-E943695F5899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
